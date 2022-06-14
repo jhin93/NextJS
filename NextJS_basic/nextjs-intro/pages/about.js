@@ -1,5 +1,12 @@
+import NavBar from "../components/NavBar";
+
 export default function Aboutus(){
-    return "about us"
+    return (
+        <div>
+            <NavBar />
+            <h1>About us</h1>
+        </div>
+    )
 }
 
 // react.js는 우리가 원할때 부르고 원할때 사용하는 library
