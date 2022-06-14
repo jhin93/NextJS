@@ -14,16 +14,13 @@ export default function NavBar() {
                 <a className={router.pathname === "/about" ? "active" : ""}>About</a>
             </Link>
             <style jsx>{`
-                nav {
-                    background-color : tomato;
-                }
                 a {
                     text-decoration : none;
                 }
                 {/* styled jsx는 컴포넌트로 범위를 한정시켜 클래스네임중복을 가능하게 해준다.
                 아래 active를 index.js의 h1에 사용해도 h1이 노란색으로 변하지 않는다. */}
                 .active {
-                    color : yellow;
+                    color : tomato;
                 }
             `}</style>
         </nav>
