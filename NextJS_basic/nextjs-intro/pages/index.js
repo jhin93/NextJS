@@ -1,16 +1,41 @@
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link"
 import Seo from "../components/Seo"
 
 export default function Home({ results }) {
-    
+    const router = useRouter();
+    const onClick = (id, title) => {
+      router.push(
+        { // push할 때 자료형을 객체로 할 수 있다.
+          pathname:`/movies/${id}`,
+          query: {
+            title
+          }
+        }, `/movies/${id}`
+      ) // 두번째 인자인 as(.push(URL, as, ...))는 url이 노출되지 않도록 masking 해준다. 대신 콘솔창에서 query로 확인가능.
+    }
     return (
         <div className="container">
           <Seo title="Home" />
           {results?.map((movie) => (
-            <div className="movie" key={movie.id}>
-              <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
-              <h4>{movie.original_title}</h4>
-            </div>
+              // 이미지 클릭시 라우터에 변수(영화 id) 대입.
+              <div onClick={() => onClick(movie.id, movie.original_title)} className="movie" key={movie.id}> 
+                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
+                {/* 제목 클릭시 라우터에 변수(영화 id) 대입 */}
+                <h4>
+                  <Link 
+                    href={{ // push할 때 자료형을 객체로 할 수 있다.
+                      pathname:`/movies/${movie.id}`,
+                      query: {
+                        title: movie.original_title,
+                      }
+                    }}
+                    as={`/movies/${movie.id}`} // 영화제목 클릭에도 Link를 적용하고 as를 적용한 모습
+                  >
+                    <a>{movie.original_title}</a>
+                  </Link>
+                </h4>
+              </div>
           ))}
           <style jsx>{`
             .container {

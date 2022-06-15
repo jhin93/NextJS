@@ -35,6 +35,10 @@ const nextConfig = {
       {
         source: "/api/movies", // url은 그대로 유지하면서 api_key를 노출하지 않는다. 그러면서 데이터는 다 받아온다.
         destination: `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
+      },
+      {
+        source: "/api/movies/:id", // source에 :id라고 입력했다면 destination에도 동일하게 적용
+        destination: `https://api.themoviedb.org/3/movie/:id?api_key=${API_KEY}`
       }
     ]
   }
