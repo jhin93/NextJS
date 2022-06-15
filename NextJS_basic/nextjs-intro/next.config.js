@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const API_KEY = process.env.API_KEY;
+
 const nextConfig = {
   reactStrictMode: true,
   async redirects() {
@@ -20,6 +22,19 @@ const nextConfig = {
         // destination:"/new-sexy-blog/:path*",
         // 시연 결과 : http://localhost:3000/old-blog/1212/comments/1212 -> http://localhost:3000/new-sexy-blog/1212/comments/1212
 
+      },
+      // redirects를 하나 더 만드려면 아래와 같이 객체를 추가한다.
+      // {
+      //   source
+      // }
+    ]
+  },
+  async rewrites() {
+    // rewrites는 유저를 redirect시키기는 하지만, url은 변하지 않는다.
+    return [
+      {
+        source: "/api/movies", // url은 그대로 유지하면서 api_key를 노출하지 않는다. 그러면서 데이터는 다 받아온다.
+        destination: `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
       }
     ]
   }
