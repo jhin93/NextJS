@@ -10,7 +10,8 @@ export default function NavBar() {
             <img src="/vercel.svg" />
             <div>
                 <Link href="/">
-                <a className={router.pathname === "/" ? "active" : ""}>Home</a>
+                {/* Link 태그 내부에는 a태그가 있는 것이 뭔가를 전달(ex className, style)하기에 수월하다. */}
+                <a className={router.pathname === "/" ? "active" : ""}>Home</a> 
                 </Link>
                 <Link href="/about">
                 <a className={router.pathname === "/about" ? "active" : ""}>About</a>
