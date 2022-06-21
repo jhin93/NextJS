@@ -1,6 +1,8 @@
 import Layout from "../components/Layout";
 import "../styles/globals.css"
 
+// nextJS는 _app.js를 가장 먼저 확인한 후, index.js나 about.js같은 페이지들을 확인한다.
+
 export default function App({Component, pageProps}) {
     return (
         <Layout>  
