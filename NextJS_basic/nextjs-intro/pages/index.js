@@ -5,9 +5,7 @@ import Seo from "../components/Seo"
 export default function Home({ results }) { // 여기의 results는 아래의 getServerSideProps의 results 이다.
     const router = useRouter();
     const onClick = (id, title) => {
-      router.push(`/movies/${title}/${id}`,
-
-      );
+      router.push(`/movies/${title}/${id}`);
     };
     return (
         <div className="container">
