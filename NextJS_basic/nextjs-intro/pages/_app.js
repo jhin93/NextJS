@@ -17,3 +17,7 @@ export default function App({Component, pageProps}) { // Component, pageProps �
 // 2. NextJS가 작성된 about.js 파일로 가서 컴포넌트를 가져다가 Component인자에 대입한다.
 // 3. return에 작성한 로직에 Component인자를 대입한 결과를 리턴한다.
 //Aboutus 컴포넌트를 렌더링할 때 위의 Component인자에 Aboutus를 대입해서 리턴한 값을 불러온다.
+
+// server side를 통해 props를 page로 보낼 수 있다.
+
+// 홈페이지(index.js)로 갈때 _app.js가 Component로 index.js의 Home을 받아오고 pageProps로 getServerSideProps의 props를 받아온다.
