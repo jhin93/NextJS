@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Link from "next/link"
 import Seo from "../components/Seo"
 
-export default function Home({ results }) { // 여기의 results는 아래의 getServerSideProps의 results 이다.
+export default function Home({ results }) { // 3. 여기의 results는 아래의 getServerSideProps의 props이다. results가 형태가 객체이기에(props:{results}) 담겨있기에 구조분해해서({ results }) 인자로 사용한다.
     const router = useRouter();
     const onClick = (id, title) => {
       router.push(`/movies/${title}/${id}`);
@@ -77,11 +77,11 @@ export async function getServerSideProps() { // 이름이 중요하다. 여기�
     // api를 여기에 작성하면 client에게 보이지 않는다.
     // object를 리턴하고, object 안에는 props라는 key가 들어있다.
     // props안에는 원하는 데이터를 아무거나 넣을 수 있다.
-    const { results } = await (
+    const { results } = await ( // 1. json 형태로 받아온 데이터를 구조분해로 results에 담는다.
       await fetch(`http://localhost:3000/api/movies`)
     ).json();
     return {
-      props: {
+      props: { // 2. result를 객체로 감싼다. props를 객체로 정의하는 규칙 때문에 어쩔 수 없다.
         results,
       },
     };
