@@ -29,7 +29,7 @@ export default function Home({ results }) { // 3. 여기의 results는 아래의
           <style jsx>{`
             .container {
               display: grid;
-              grid-template-columns: 1fr 1fr;
+              grid-template-columns: 1fr 1fr 1fr 1fr;
               padding: 20px;
               gap: 20px;
             }
