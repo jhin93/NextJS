@@ -1,25 +1,38 @@
+import { useRouter } from "next/router";
 
-import { useRouter } from "next/router"
-
-// url에 변수를 넣는 방법 (dynamic url)
-// path 폴더 내부에 [변수].js 생성
-// [] 내부에 쓴 변수의 이름이 router의 query에 그대로 나타난다.
-export default function Detail({params}) {
-    const router = useRouter();
-    const [id, name] = params || []; // 서버에선 아직 router.query.params 가 배열이 아니기에 incognito 모드에선 에러가 날 수 있다. 그래서 그럴땐 빈배열로 대체한다
-    console.log(router);
-    return (
-        <div>
-            <h4>{id}</h4>
-        </div>
-    );
+export default function BillionairePerson({ results }) {
+  const router = useRouter();
+  console.log(" ---- results ---- :", results);
+  return (
+    <div>
+      <img alt="billionaire" src={`${results.squareImage}`} />
+      <h4>{`${results.name}`}</h4>
+      <div>{`${Math.round(results.netWorth / 1000)} Billion`}</div>
+      <div>{`${results.country}`}</div>
+      <div>{`${results.industries[0]}`}</div>
+      <div>{`${results.bio}`}</div>
+      <div className="financialAssets">
+        Financial Assets
+        {/* {`${results.financialAssets[0].ticker}`}
+        {`${results.financialAssets[0].numberOfShares}`} */}
+        {`${results.financialAssets.map((ele) => (
+          <div>{`${ele.ticker}`}</div>
+        ))}`}
+      </div>
+    </div>
+  );
 }
 
-
-export function getServerSideProps({params: { params }}) {
-    return {
-        props: {
-            params
-        },
+export async function getServerSideProps({ params: { params } }) {
+  const results = await (
+    await fetch(
+      `https://billions-api.nomadcoders.workers.dev/person/${params[0]}`
+    )
+  ).json();
+  // console.log(" ---- results ---- :", results);
+  return {
+    props: {
+      results
     }
+  };
 }
