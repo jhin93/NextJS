@@ -13,11 +13,12 @@ export default function BillionairePerson({ results }) {
       <div>{`${results.bio}`}</div>
       <div className="financialAssets">
         Financial Assets
-        {/* {`${results.financialAssets[0].ticker}`}
-        {`${results.financialAssets[0].numberOfShares}`} */}
-        {`${results.financialAssets.map((ele) => (
+        {`${results.financialAssets[0].ticker}`}
+        {`${results.financialAssets[0].numberOfShares}`}
+        {/* {`${results.financialAssets.map((ele) => (
           <div>{`${ele.ticker}`}</div>
-        ))}`}
+        ))}`} */}
+
       </div>
     </div>
   );
