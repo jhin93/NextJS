@@ -4,12 +4,14 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
-  return <div className = "flex flex-col space-y-2 p-5">
-      <details>
-        <summary>What is my favorite food</summary>
-        <span>김치</span>
-      </details>
-  </div>
+  return (
+  <div className = "flex flex-col space-y-2 p-5">
+    <ul className='list-decimal'>
+      <li>hi</li>
+      <li>hi</li>
+      <li>hi</li>
+    </ul>
+  </div>)
 };
 
 export default Home
