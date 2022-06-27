@@ -7,5 +7,6 @@ module.exports = { // npx tailwindcss init -p를 통해 tailwind의 config 파�
   theme: {
     extend: {},
   },
+  darkMode: "media", // class
   plugins: [],
 }
