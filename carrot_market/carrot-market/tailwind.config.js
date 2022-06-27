@@ -7,6 +7,7 @@ module.exports = { // npx tailwindcss init -p를 통해 tailwind의 config 파�
   theme: {
     extend: {},
   },
-  darkMode: "media", // class
+  // 컴퓨터의 다크모드 설정을 따라갈 건지, 아니면 리액트나 js로 직접 토글시킬건지를 설정한다. 어떤 웹사이트들은 다크모드 버튼을 가진다.
+  darkMode: "media", // media는 컴퓨터의 다크모드를 따라가고, class는 다크모드를 수동으로 변경하도록 설정한다.
   plugins: [],
 }
