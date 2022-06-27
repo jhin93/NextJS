@@ -8,10 +8,15 @@ const Home: NextPage = () => {
     <div className="bg-slate-400 py-20 px-20 grid gap-10 min-h-screen">
       <div className="bg-white p-6 rounded-3xl shadow-xl">
         <span className="font-semibold text-2xl">Select Item</span>
-        <div className="flex justify-between my-2">
-          <span className="text-gray-500">Grey Chair</span>
-          <span className="font-semibold">$19</span>
-        </div>
+        <ul>
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div key={i} className="flex justify-between my-2">
+              <span className="text-gray-500">Grey Chair</span>
+              <span className="font-semibold">$19</span>
+            </div>
+          ))}
+        </ul>
+        
         <div className="flex justify-between">
           <span className="text-gray-500">Grey Chair</span>
           <span className="font-semibold">$19</span>
