@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   return (
+    // grid gap-10 lg:grid-cols-2 xl:grid-cols-3
     <div className="bg-slate-400 xl:place-content-center py-20 px-20 grid gap-10 lg:grid-cols-2 xl:grid-cols-3 min-h-screen">
       <div className="bg-white  flex flex-col justify-between p-6 rounded-3xl shadow-xl">
         <span className="font-semibold text-2xl">Select Item</span>
@@ -55,6 +56,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       </div>
+      {/* lg:col-span-2 xl:col-span-1 lg 사이즈일때 2개 열 사이즈 차지 */}
       <div className="bg-white p-6 rounded-3xl shadow-xl lg:col-span-2 xl:col-span-1">
         <div className="flex mb-5 justify-between items-center">
           <span>⬅️</span>
