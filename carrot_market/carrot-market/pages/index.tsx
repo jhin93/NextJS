@@ -20,6 +20,7 @@ const Home: NextPage = () => {
           <span>Total</span>
           <span className="font-semibold">$10</span>
         </div>
+        {/* 조건:실행내용 ex) hover:bg-teal-500 hover시, bg를 teal-500으로 한다 */}
         <button
           className="mt-5 bg-blue-500 text-white p-3
           text-center rounded-xl w-3/4 mx-auto 
