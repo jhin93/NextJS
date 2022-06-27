@@ -56,7 +56,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       </div>
-      {/* lg:col-span-2 xl:col-span-1 lg 사이즈일때 2개 열 사이즈 차지 */}
+      {/* lg:col-span-2 xl:col-span-1 lg 사이즈일때 2개 열 사이즈 차지, xl 일떄를 작성해줘야 한다. 안그러면 lg 사이즈 설정이 xl까지 이어짐 */}
       <div className="bg-white p-6 rounded-3xl shadow-xl lg:col-span-2 xl:col-span-1">
         <div className="flex mb-5 justify-between items-center">
           <span>⬅️</span>
