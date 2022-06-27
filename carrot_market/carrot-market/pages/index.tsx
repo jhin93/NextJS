@@ -6,7 +6,7 @@ import styles from '../styles/Home.module.css'
 const Home: NextPage = () => {
   return (
     <div className="bg-slate-400 py-20 px-20 grid gap-10 min-h-screen">
-      <div className="bg-white p-6 rounded-3xl shadow-xl">
+      <div className="bg-white p-6 rounded-3xl shadow-xl"> 
         <span className="font-semibold text-2xl">Select Item</span>
         <ul>
           {[1, 2, 3, 4].map((i) => (
@@ -42,7 +42,8 @@ const Home: NextPage = () => {
           Checkout
         </button>
       </div>
-      <div className="bg-white overflow-hidden rounded-3xl shadow-xl">
+      {/* group 부여 */}
+      <div className="bg-white overflow-hidden rounded-3xl shadow-xl group">
         <div className="bg-blue-500 p-6 pb-14">
           <span className="text-white text-2xl">Profile</span>
         </div>
@@ -52,7 +53,8 @@ const Home: NextPage = () => {
               <span className="text-xs text-gray-500">Orders</span>
               <span className="font-medium">340</span>
             </div>
-            <div className="h-24 w-24 bg-zinc-300 rounded-full" />
+            {/* 특정 group에 hover 속성 적용 */}
+            <div className="h-24 w-24 bg-zinc-300 rounded-full group-hover:bg-red-300" />
             <div className="flex flex-col items-center">
               <span className="text-xs text-gray-500">Spent</span>
               <span className="font-medium">$340</span>
