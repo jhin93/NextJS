@@ -5,8 +5,10 @@ import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   return (
-    // grid gap-10 lg:grid-cols-2 xl:grid-cols-3
+    // 반응형 -  grid gap-10 lg:grid-cols-2 xl:grid-cols-3. 
+    // xl:place-content-center - 세로로 너무 길때 적당히 잘라준다
     <div className="bg-slate-400 xl:place-content-center py-20 px-20 grid gap-10 lg:grid-cols-2 xl:grid-cols-3 min-h-screen">
+      {/* flex-col */}
       <div className="bg-white  flex flex-col justify-between p-6 rounded-3xl shadow-xl">
         <span className="font-semibold text-2xl">Select Item</span>
         <ul>
@@ -35,6 +37,7 @@ const Home: NextPage = () => {
         </button>
       </div>
       <div className="bg-white overflow-hidden rounded-3xl shadow-xl group">
+        {/* landscape 속성 : 화면의 방향에 대한 속성 */}
         <div className="portrait:bg-indigo-600 landscape:bg-teal-500 p-6 pb-14 xl:pb-40">
           <span className="text-white text-2xl">Profile</span>
         </div>
