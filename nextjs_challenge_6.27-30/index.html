@@ -99,20 +99,67 @@
       </div>
     </div>
   </div>
-  <div class="relative mx-6 bg-white px-6 ring-0 sm:max-w-lg sm:px-10">
+  <div class="relative mx-6 bg-yellow-500 px-6 ring-0 sm:max-w-lg sm:px-10">
     <div class="mx-auto max-w-md">
-      <div class="py-8 text-4xl font-bold">Weather</div>
-      <div class="divide-y divide-gray-300/50">
-        <div class="flex justify-between rounded border-2 border-b-4 border-black bg-green-300 p-5">
-          <div class="bg-green-400">
-            <p class="text- font-bold">Casius</p>
-            <p class="text-xs font-semibold">Mars, 12AM</p>
-          </div>
-          <div class="bg-green-500 pl-20">
-            <p>85</p>
-          </div>
+      <div class="py-8 text-4xl font-bold flex justify-between">
+        <svg class="w-24 h-12" fill="white" viewBox="12 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z" clip-rule="evenodd"></path></svg>
+        <p class="text-xl self-center pr-24">Friends</p>
+      </div>
+      <input class="p-2 w-64 h-12 rounded rounded-r-none border-2 border-b-4 border-r-0 border-black" placeholder="Search with love ...">
+        <button class="absolute w-14">
+          <svg class="w-8 h-12 bg-white border-2 border-black rounded border-b-4 rounded-l-none border-l-0" fill="none" stroke="currentColor" viewBox="2 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </button>
+      </input>
+    </div>
+    <div class="divide-y divide-gray-300/50 bg-white w-72 rounded flex justify-between items-center border-2 border-b-4 border-black p-2 my-4">
+      <div class="flex">
+        <svg class="w-12 h-12 pr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clip-rule="evenodd"></path></svg>
+        <div>
+          <p class="text-xl font-bold">Bill Rizer</p>
+          <p class="text-xs font-semibold">Planet Designer</p>
         </div>
       </div>
+      <button class="bg-yellow-500 h-6 w-14 text-xs rounded border-2 border-black border-b-4">Invite</button>
+    </div>    
+    <div class="divide-y divide-gray-300/50 bg-white w-72 rounded flex justify-between items-center border-2 border-b-4 border-black p-2 my-4">
+      <div class="flex">
+        <svg class="w-12 h-12 pr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clip-rule="evenodd"></path></svg>
+        <div>
+          <p class="text-xl font-bold">Genbei Yagi</p>
+          <p class="text-xs font-semibold">Planet Designer</p>
+        </div>
+      </div>
+      <button class="bg-yellow-500 h-6 w-14 text-xs rounded border-2 border-black border-b-4">Invite</button>
+    </div>  
+    <div class="divide-y divide-gray-300/50 bg-white w-72 rounded flex justify-between items-center border-2 border-b-4 border-black p-2 my-4">
+      <div class="flex">
+        <svg class="w-12 h-12 pr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clip-rule="evenodd"></path></svg>
+        <div>
+          <p class="text-xl font-bold">Lancy Neo</p>
+          <p class="text-xs font-semibold">Rogue Corp</p>
+        </div>
+      </div>
+      <button class="bg-black h-6 w-14 text-xs text-white rounded border-2 border-black border-b-4">Invited</button>
+    </div>
+    <div class="divide-y divide-gray-300/50 bg-white w-72 rounded flex justify-between items-center border-2 border-b-4 border-black p-2 my-4">
+      <div class="flex">
+        <svg class="w-12 h-12 pr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clip-rule="evenodd"></path></svg>
+        <div>
+          <p class="text-xl font-bold">Bill Rizer</p>
+          <p class="text-xs font-semibold">Hard Cops</p>
+        </div>
+      </div>
+      <button class="bg-yellow-500 h-6 w-14 text-xs rounded border-2 border-black border-b-4">Invite</button>
+    </div>
+    <div class="divide-y divide-gray-300/50 bg-white w-72 rounded flex justify-between items-center border-2 border-b-4 border-black p-2 my-4">
+      <div class="flex">
+        <svg class="w-12 h-12 pr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clip-rule="evenodd"></path></svg>
+        <div>
+          <p class="text-xl font-bold">Konami</p>
+          <p class="text-xs font-semibold">Xenon Creator</p>
+        </div>
+      </div>
+      <button class="bg-yellow-500 h-6 w-14 text-xs rounded border-2 border-black border-b-4">Invite</button>
     </div>
   </div>
 </div>
