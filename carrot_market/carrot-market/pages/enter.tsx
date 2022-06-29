@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import { useState } from "react";
 
-function cls(...classnames: string[]) {
-  return classnames.join(" ");
+function cls(...classnames: string[]) { // 다수의 인자를 받을 수 있고, 인자는 string 배열
+  return classnames.join(" "); // 클래스네임을 만들기 위해 공백을 포함해서 하나의 string으로 만들기.
 }
 
 const Enter: NextPage = () => {
@@ -17,7 +17,7 @@ const Enter: NextPage = () => {
           <h5 className="text-sm text-gray-500 font-medium">Enter using:</h5>
           <div className="grid  border-b  w-full mt-8 grid-cols-2 ">
             <button
-              className={cls(
+              className={cls( // 만든 함수를 사용하여 더 편하게 사용 가능. {``} 를 안써도 
                 "pb-4 font-medium text-sm border-b-2",
                 method === "email"
                   ? " border-orange-500 text-orange-400"
@@ -55,7 +55,7 @@ const Enter: NextPage = () => {
             ) : null}
             {method === "phone" ? (
               <div className="flex rounded-md shadow-sm">
-                <span className="flex items-center justify-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 select-none text-sm">
+                <span className="flex items-center justify-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 select-none text-sm"> {/* rounded-l : 왼쪽 테두리 둥글게 r-0 오른쪽 테두리 삭제 */}
                   +82
                 </span>
                 <input
