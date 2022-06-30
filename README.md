@@ -45,4 +45,14 @@ pscale 에서 제공하는 URL을 데이터베이스에 연결
 `DATABASE_URL="mysql://127.0.0.1:3306/carrot-market"`
 
 `npx prisma db push`
-schema.prisma에 작성된 model을 planetscale에 푸쉬
+schema.prisma에 작성된 model을 관리자 패널에서 볼수있음
+
+`npx prisma studio`
+schema.prisma에 작성된 모델을 패널에서 볼 수 있음
+http://localhost:5555/
+
+`npm i @prisma/client`
+
+`npx prisma generate`
+Generated Prisma Client (4.0.0 | library) to ./node_modules/@prisma/client
+index.d.ts에서 확인 가능
