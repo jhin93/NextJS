@@ -11,3 +11,8 @@ NextJS를 공부하기 위한 공간입니다.
 에러 : Error [ERR_PACKAGE_PATH_NOT_EXPORTED]: Package subpath './lib/tokenize' is not defined by "exports" in ~~/package.json
 설명 : https://bcp0109.tistory.com/347
 해결 : nodejs의 높은 버전으로 설치가 안될 때가 있다. 그때는 nvm use 낮은 버전으로 버전 바꾸고 npm install 시도할 것.
+
+
+Prisma
+
+불러오기 : npx prisma (+init)
