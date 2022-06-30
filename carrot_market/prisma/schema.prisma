@@ -4,13 +4,22 @@
 // Prisma는 이 파일을 읽고 데이터베이스에 변경점을 deploy한다.
 // 또 자바스크립트 혹은 타입스크립트 client를 만들어준다. 프리즈마가 만들어준 client는 타입스크립트로 데이터베이스에 말하는 것을 도와준다. prisma는 번역기.
 
+// foreign key.
+// 사용자 id만 저장하면, 그 id에 딸린 다른 정보들까지 사용자 db에서 알아낼 수 있다.
+// 프리즈마가 댓글을 작성한 아이디가 실제로 존재하는 유저인지 vitess 대신 확인해준다.
+
+//Vitess는 PlanetScale이 데이터베이스로 사용한다.
+// Scability 특화됐다. 디비를 잘게 쪼개서 여러 서버에 분산시키는 것에 특화.
+
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 

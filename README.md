@@ -43,3 +43,6 @@ admin pannel에서도 동일하게 생성이 가능
 pscale 에서 제공하는 URL을 데이터베이스에 연결
 
 `DATABASE_URL="mysql://127.0.0.1:3306/carrot-market"`
+
+`npx prisma db push`
+schema.prisma에 작성된 model을 planetscale에 푸쉬
