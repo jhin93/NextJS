@@ -11,13 +11,15 @@ interface LoginForm {
 }
 
 export default function Forms() {
-    const {register, handleSubmit} = useForm<LoginForm>();
+    const {register, handleSubmit, formState : { errors }} = useForm<LoginForm>();
     const onValid = (data:LoginForm) => {
         console.log("i'm valid")
     }
     const onInvalid = (errors: FieldErrors) => {
         console.log(errors);
     }
+    // formState의 errors
+    console.log(errors) 
     return ( 
         <form onSubmit={handleSubmit(onValid, onInvalid)}>
             <input {...register("username", {
@@ -29,11 +31,11 @@ export default function Forms() {
             })} type="text" placeholder="Username"/> 
             <input {...register("email", {
                 required: "Email is required",
-                validate: { // validate 메소드 사용.
-                    // gmail을 사용하지 않는 이메일에(! 발동)를 value를 포함시킨다. 에러타입이 notGmail. 
+                validate: {
                     notGmail: (value) => !value.includes("@gmail.com") || "Gmail is not Allowed",  
                 }
             })} type="email" placeholder="email"/>
+            {errors.email?.message} {/* formState의 에러 중 email이 있다면 그것의 message를 브라우저에 찍는다. */}
             <input {...register("password", {
                 required: "Password is required"
             })} type="password" placeholder="password"/>
