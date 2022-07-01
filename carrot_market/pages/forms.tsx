@@ -19,13 +19,14 @@ export default function Forms() {
         formState : { errors }, // 에러를 객체로 만드는 메소드. 이게 있어야 setError 등 에러 관련 메소드를 쓸 수 있다.
         setError, // 에러를 의도한대로 설정 가능. 특정한 필드에만 설정할 수도 있다.
         setValue, // 값을 직접 수정하고 싶을 때 쓰는 메소드
-        reset // form을 초기화하는 메소드
+        reset, // form을 초기화하는 메소드
+        resetField // 특정 필드만 초기화하는 메소드
     } = useForm<LoginForm>({
         mode: "onChange"
     });
     const onValid = (data:LoginForm) => {
         console.log("i'm valid")
-        setError("username", {message: "Taken username"}) // setError로 username에만 에러를 설정한 모습
+        resetField("password"); // 다 맞게 입력하면(onValid) 비밀번호만 초기화
     }
     const onInvalid = (errors: FieldErrors) => {
         console.log(errors);
