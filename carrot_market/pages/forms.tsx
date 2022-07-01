@@ -31,6 +31,7 @@ export default function Forms() {
     const onInvalid = (errors: FieldErrors) => {
         console.log(errors);
     }
+    console.log(watch("email")) // watch 메소드로 email 값 얻기
     return ( 
         <form onSubmit={handleSubmit(onValid, onInvalid)}>
             <input {...register("username", {
