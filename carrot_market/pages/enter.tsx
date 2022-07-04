@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import Button from "../components/button";
 import Input from "../components/input";
 import { cls } from "../libs/client/utils";
+import useMutation from '../libs/client/useMutation';
 
 interface EnterForm {
   email?:string;
@@ -11,6 +12,8 @@ interface EnterForm {
 }
 
 const Enter: NextPage = () => {
+  // enter를 호출하면 fetch로 POST 한다. 또한 mutation에서 무슨 일(ex 로딩, 에러, POST의 결과)이 일어나는지 알기 위해 {}를 사용.
+  const [enter, {loading, data, error}] = useMutation("/api/users/enter"); // useMutation은 어떤 url을 mutate할지 알아야 한다.
   const [submitting, setSubmitting] = useState(false);
   const { register, handleSubmit, reset } = useForm<EnterForm>() // useForm의 register 메소드를 사용하는데 타입은 EnterForm에 맞춘다.
   const [method, setMethod] = useState<"email" | "phone">("email");
@@ -23,16 +26,7 @@ const Enter: NextPage = () => {
     setMethod("phone")
   };
   const onValid = (data:EnterForm) => { // EnterForm 타입의 인자를 받음
-    setSubmitting(true)
-    fetch("/api/users/enter", { // /api/users/enter.tsx 를 가져옴
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { // headers가 있어야 users/enters.tsx의 req.body.email 가 출력됨
-        "Content-Type" : "application/json"
-      }
-    }).then(() => {
-      setSubmitting(false)
-    })
+    enter(data); // 여기의 enter는 위에 정의된 enter
   }
   return (
     <div className="mt-16 px-4">
