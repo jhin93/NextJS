@@ -7,6 +7,7 @@ export default function withHandler(
     method: "GET" | "POST" | "DELETE", 
     fn: (req:NextApiRequest, res:NextApiResponse) => void
 ) {
+    // withHandler는 껍데기일 뿐이고, 아래 리턴되는 함수가 nextJS에 의해 실행된다. 우리가 원하는 대로 function을 설정해서 return 할 수 있다. 메소드와 fn 두 인자를 활용해서.
     // nextJS에서 api route를 만들때는 해당 function을 export default 해야 한다.
     // enter.tsx에서 삭제한 handler 함수를 리턴해야 하고, 그러려면 아래와 같이(handler 함수의 인자도 포함해서) 작성해야 한다.
     return async function(req:NextApiRequest, res:NextApiResponse) {
@@ -15,7 +16,7 @@ export default function withHandler(
             return;
         }
         try {
-            await fn(req, res)
+            await fn(req, res) // 실행
         }   catch (error) {
             console.log(error);
             return res.status(500).json({ error })
