@@ -25,9 +25,10 @@ const Enter: NextPage = () => {
     reset(); // 누군가 메소드를 바꾸면 reset.즉 상태를 갱신.
     setMethod("phone")
   };
-  const onValid = (data:EnterForm) => { // EnterForm 타입의 인자를 받음
-    enter(data); // 여기의 enter는 위에 정의된 enter
+  const onValid = (validForm:EnterForm) => { // EnterForm 타입의 인자를 받음
+    enter(validForm); // 여기의 enter는 위에 정의된 enter. enter(validForm)
   }
+  console.log(loading, data, error)
   return (
     <div className="mt-16 px-4">
       <h3 className="text-3xl font-bold text-center">Enter to Carrot</h3>
