@@ -22,7 +22,10 @@ const Enter: NextPage = () => {
     setMethod("phone")
   };
   const onValid = (data:EnterForm) => { // EnterForm 타입의 인자를 받음
-    console.log("data : ", data)
+    fetch("/api/users/enter", { // /api/users/enter.tsx 를 가져옴
+      method: "POST",
+      body: JSON.stringify(data),
+    })
   }
   return (
     <div className="mt-16 px-4">
