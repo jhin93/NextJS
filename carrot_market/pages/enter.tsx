@@ -25,6 +25,9 @@ const Enter: NextPage = () => {
     fetch("/api/users/enter", { // /api/users/enter.tsx 를 가져옴
       method: "POST",
       body: JSON.stringify(data),
+      headers: { // headers가 있어야 users/enters.tsx의 req.body.email 가 출력됨
+        "Content-Type" : "application/json"
+      }
     })
   }
   return (
