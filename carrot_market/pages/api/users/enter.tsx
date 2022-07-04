@@ -1,6 +1,11 @@
+import client from "@libs/server/client";
+import withHandler from "@libs/server/withHandler";
 import { NextApiRequest, NextApiResponse } from "next";
-import client from "../../../libs/server/client";
-import withHandler from "../../../libs/server/withHandler";
+
+
+
+
+
 
 
 async function handler(req:NextApiRequest, res:NextApiResponse) { // handler 주변에 껍데기를 만듬(withHandler)
