@@ -11,6 +11,7 @@ interface EnterForm {
 }
 
 const Enter: NextPage = () => {
+  const [submitting, setSubmitting] = useState(false);
   const { register, handleSubmit, reset } = useForm<EnterForm>() // useForm의 register 메소드를 사용하는데 타입은 EnterForm에 맞춘다.
   const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => {
@@ -22,12 +23,15 @@ const Enter: NextPage = () => {
     setMethod("phone")
   };
   const onValid = (data:EnterForm) => { // EnterForm 타입의 인자를 받음
+    setSubmitting(true)
     fetch("/api/users/enter", { // /api/users/enter.tsx 를 가져옴
       method: "POST",
       body: JSON.stringify(data),
       headers: { // headers가 있어야 users/enters.tsx의 req.body.email 가 출력됨
         "Content-Type" : "application/json"
       }
+    }).then(() => {
+      setSubmitting(false)
     })
   }
   return (
@@ -86,7 +90,7 @@ const Enter: NextPage = () => {
           ) : null}
           {method === "email" ? <Button text={"Get login link"} /> : null}
           {method === "phone" ? (
-            <Button text={"Get one-time password"} />
+            <Button text={submitting ? "Loading" : "Get one-time password"} />
           ) : null}
         </form>
 

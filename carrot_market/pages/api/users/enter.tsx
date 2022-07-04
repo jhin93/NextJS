@@ -6,6 +6,9 @@ export default async function handler(
     req:NextApiRequest, 
     res:NextApiResponse
 ) {
+    if(req.method !== "POST") {
+        res.send(401)
+    }
     console.log(req.body)
     res.send(200)
 }
