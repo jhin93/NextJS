@@ -9,6 +9,7 @@ interface InputProps {
     label,
     name,
     kind = "text",
+    register,
     ...rest
   }: InputProps) {
     return (
@@ -23,6 +24,7 @@ interface InputProps {
           <div className="rounded-md relative flex  items-center shadow-sm">
             <input
               id={name}
+              {...register}
               {...rest}
               className="appearance-none w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
             />
@@ -35,6 +37,7 @@ interface InputProps {
             </div>
             <input
               id={name}
+              {...register}
               {...rest}
               className="appearance-none pl-7 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
             />
@@ -50,6 +53,7 @@ interface InputProps {
             </span>
             <input
               id={name}
+              {...register} // 함수실행(register())은 enter.tsx에서 이미 된 상태.
               {...rest}
               className="appearance-none w-full px-3 py-2 border border-gray-300 rounded-md rounded-l-none shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
             />

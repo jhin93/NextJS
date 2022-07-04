@@ -1,13 +1,27 @@
 import type { NextPage } from "next";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import Button from "../components/button";
 import Input from "../components/input";
 import { cls } from "../libs/utils";
 
+interface EnterForm {
+  email?:string;
+  phone?:string;
+}
+
 const Enter: NextPage = () => {
+  const { register, watch, reset } = useForm<EnterForm>() // useForm의 register 메소드를 사용하는데 타입은 EnterForm에 맞춘다.
   const [method, setMethod] = useState<"email" | "phone">("email");
-  const onEmailClick = () => setMethod("email");
-  const onPhoneClick = () => setMethod("phone");
+  const onEmailClick = () => {
+    reset(); // 누군가 메소드를 바꾸면 reset.즉 상태를 갱신.
+    setMethod("email")
+  };
+  const onPhoneClick = () => {
+    reset(); // 누군가 메소드를 바꾸면 reset.즉 상태를 갱신.
+    setMethod("phone")
+  };
+  console.log(watch()) // console.log로 form이 정상작동하는지 확인.
   return (
     <div className="mt-16 px-4">
       <h3 className="text-3xl font-bold text-center">Enter to Carrot</h3>
@@ -41,10 +55,16 @@ const Enter: NextPage = () => {
         </div>
         <form className="flex flex-col mt-8 space-y-4">
           {method === "email" ? (
-            <Input name="email" label="Email address" type="email" required />
+            <Input 
+              register={register("email")} // 우변은 useForm<EnterForm>의 register이고, 좌변은 input.tsx에서 정의한 rest. rest는 앞의 세 prop(label, name, kind)에 해당하지 않는 나머지 prop을 포함한다.
+              name="email" 
+              label="Email address" 
+              type="email" 
+              required />
           ) : null}
           {method === "phone" ? (
             <Input
+              register={register("phone")}
               name="phone"
               label="Phone number"
               type="number"
