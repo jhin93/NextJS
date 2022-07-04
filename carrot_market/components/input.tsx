@@ -1,8 +1,12 @@
+import type { UseFormRegisterReturn } from "react-hook-form"; // type은 import할때 import type이라고 명시.
+
 interface InputProps {
     label: string;
     name: string;
     kind?: "text" | "phone" | "price";
-    [key: string]: any; // 원하는 prop을 input에 전달
+    type: string
+    register : UseFormRegisterReturn
+    required: boolean
   }
   
   export default function Input({
@@ -10,7 +14,8 @@ interface InputProps {
     name,
     kind = "text",
     register,
-    ...rest
+    type,
+    required
   }: InputProps) {
     return (
       <div>
@@ -24,8 +29,9 @@ interface InputProps {
           <div className="rounded-md relative flex  items-center shadow-sm">
             <input
               id={name}
+              required={required}
               {...register}
-              {...rest}
+              type={type}
               className="appearance-none w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
             />
           </div>
@@ -37,8 +43,9 @@ interface InputProps {
             </div>
             <input
               id={name}
+              required={required}
               {...register}
-              {...rest}
+              type={type}
               className="appearance-none pl-7 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
             />
             <div className="absolute right-0 pointer-events-none pr-3 flex items-center">
@@ -53,8 +60,9 @@ interface InputProps {
             </span>
             <input
               id={name}
+              required={required}
               {...register} // 함수실행(register())은 enter.tsx에서 이미 된 상태.
-              {...rest}
+              type={type}
               className="appearance-none w-full px-3 py-2 border border-gray-300 rounded-md rounded-l-none shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
             />
           </div>

@@ -11,7 +11,7 @@ interface EnterForm {
 }
 
 const Enter: NextPage = () => {
-  const { register, watch, reset } = useForm<EnterForm>() // useForm의 register 메소드를 사용하는데 타입은 EnterForm에 맞춘다.
+  const { register, handleSubmit, reset } = useForm<EnterForm>() // useForm의 register 메소드를 사용하는데 타입은 EnterForm에 맞춘다.
   const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => {
     reset(); // 누군가 메소드를 바꾸면 reset.즉 상태를 갱신.
@@ -21,7 +21,9 @@ const Enter: NextPage = () => {
     reset(); // 누군가 메소드를 바꾸면 reset.즉 상태를 갱신.
     setMethod("phone")
   };
-  console.log(watch()) // console.log로 form이 정상작동하는지 확인.
+  const onValid = (data:EnterForm) => { // EnterForm 타입의 인자를 받음
+    console.log("data : ", data)
+  }
   return (
     <div className="mt-16 px-4">
       <h3 className="text-3xl font-bold text-center">Enter to Carrot</h3>
@@ -53,10 +55,12 @@ const Enter: NextPage = () => {
             </button>
           </div>
         </div>
-        <form className="flex flex-col mt-8 space-y-4">
+        <form onSubmit={handleSubmit(onValid)} className="flex flex-col mt-8 space-y-4"> {/*handleSubmit을 form에서 onSubmit 메소드로 받음. handleSubmit은 onValid를 인자로 함. 이메일 입력 후 제출 버튼을 누르면 onValid 함수 실행을 콘솔에서 확인가능*/}
           {method === "email" ? (
             <Input 
-              register={register("email")} // 우변은 useForm<EnterForm>의 register이고, 좌변은 input.tsx에서 정의한 rest. rest는 앞의 세 prop(label, name, kind)에 해당하지 않는 나머지 prop을 포함한다.
+              register={register("email", {
+                required: true
+              })} // 우변은 useForm<EnterForm>의 register이고, 좌변은 input.tsx에서 정의한 rest. rest는 앞의 세 prop(label, name, kind)에 해당하지 않는 나머지 prop을 포함한다.
               name="email" 
               label="Email address" 
               type="email" 
@@ -64,7 +68,9 @@ const Enter: NextPage = () => {
           ) : null}
           {method === "phone" ? (
             <Input
-              register={register("phone")}
+              register={register("phone", {
+                required: true
+              })}
               name="phone"
               label="Phone number"
               type="number"
