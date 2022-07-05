@@ -26,7 +26,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
-
+# env 삭제 테스트중
 # vercel
 .vercel
 
