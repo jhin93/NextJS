@@ -19,7 +19,11 @@ async function handler(req:NextApiRequest, res:NextApiResponse) { // handler 주
         },
         update: {} // 이 경우엔 찾아도 update 안할 것이기에 비워둠.
     })
-    console.log("user : ", user)
+    const token = await client.token.create({
+        data: { // 왜 data는 payload, user를 필요로 하는가?
+            
+        }
+    })
     // if(email){ // 만약 입력된 이메일의 유저를 찾는다면
     //     const user = await client.user.findUnique({ // client로 prisma에 접근
     //         where: {
