@@ -5,50 +5,25 @@ import client from "@libs/server/client";
 
 async function handler(req:NextApiRequest, res:NextApiResponse) { // handler 주변에 껍데기를 만듬(withHandler)
     const { phone, email } = req.body // 전화번호 혹은 이메일 둘중 하나를 가짐.
-    const payload = phone ? { phone: +phone } : {email} // phone 혹은 email인 상황을 3항연산자로 해결
-    // upsert. prisma 메소드
-    // upsert는 뭔가 생성하거나 수정할 때 사용한다.
-    // .upsert()는 3가지 메소드를 포함한다. create 생성, update 수정, where 검색
-    const user = await client.user.upsert({
-        where : {
-            ...payload,
-        },
-        create: {
-            name: "Anonymous", // 에러 : 'name' 속성이 '{ phone: number; }' 형식에 없지만 'UserCreateInput' 형식에서 필수입니다.
-            ...payload,
-        },
-        update: {} // 이 경우엔 찾아도 update 안할 것이기에 비워둠.
-    })
+    const user = phone ? { phone: +phone } : { email };
+    const payload = Math.floor(100000 + Math.random() * 900000) + "";
     const token = await client.token.create({
-        data: { // index.d.ts의 type TokenCreateInput 에 나와있음. 
-            //data -cmd 클릭- TokenCreateInput - UserCreateNestedOneWithoutTokensInput cmd 클릭 - type UserCreateNestedOneWithoutTokensInput
-            // UserCreateNestedOneWithoutTokensInput 가 PrismaClient로 모델 연결 가능 - 유저를 생성해 연결하고 싶은 토큰을 명시해야 함. 아니면 그냥 create 하고 존재하는 토큰에 연결
-            payload: "1234",
-            user: {
-                connect: { // 이 토큰을 connect 한다. 12번 줄의 user와
-                    id: user.id 
-                }
-            }
-        }
-    })
-    // if(email){ // 만약 입력된 이메일의 유저를 찾는다면
-    //     const user = await client.user.findUnique({ // client로 prisma에 접근
-    //         where: {
-    //             email,
-    //         }
-    //     });
-    //     if(user) console.log("found it")
-    //     if(!user){ // 만약 찾는 유저가 없다면 create user.
-    //         console.log("Did not find. Will create")
-    //         await client.user.create({ // create 메소드는 다음과 같이 유저를 만든다 
-    //             data: { // 유저를 특정지을 수 있는 데이터를 같이 보내줘야 함. 필수로 보내야 하는 name을 보낸다. 전화번호 이메일은 없을수도 있음
-    //                 name:"Anonymous",
-    //                 email,
-    //             }
-    //         })
-    //     }
-    //     console.log(user)
-    // }
+      data: {
+        payload,
+        user: {
+          connectOrCreate: { // 찾지 못하면 생성해줌.
+            where: {
+              ...user,
+            },
+            create: { // where에서 찾는 유저가 없다면, 여기서 create
+              name: "Anonymous",
+              ...user,
+            },
+          },
+        },
+      },
+    });
+    console.log(token);
     return res.status(200).end();
 }
 // http://localhost:3000/api/client-test에서 확인 가능
