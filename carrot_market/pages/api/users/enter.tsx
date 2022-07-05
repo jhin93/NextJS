@@ -1,21 +1,24 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import withHandler from "@libs/server/withHandler";
+import withHandler, { ResponseType } from "@libs/server/withHandler";
 import client from "@libs/server/client";
 
-
-async function handler(req:NextApiRequest, res:NextApiResponse) { // handler 주변에 껍데기를 만듬(withHandler)
-    const { phone, email } = req.body // 전화번호 혹은 이메일 둘중 하나를 가짐.
-    const user = phone ? { phone: +phone } : { email };
+async function handler(
+    req: NextApiRequest,
+    res: NextApiResponse<ResponseType>
+  ) {
+    const { phone, email } = req.body;
+    const user = phone ? { phone: +phone } : email ? { email } : null; // 2중 3항 연산자. 폰 먼저 체크하고, 없으면 이메일 체크, 이메일도 없으면 null
+    if (!user) return res.status(400).json({ ok: false }); // user가 null일때 400 에러
     const payload = Math.floor(100000 + Math.random() * 900000) + "";
     const token = await client.token.create({
       data: {
         payload,
         user: {
-          connectOrCreate: { // 찾지 못하면 생성해줌.
+          connectOrCreate: {
             where: {
               ...user,
             },
-            create: { // where에서 찾는 유저가 없다면, 여기서 create
+            create: {
               name: "Anonymous",
               ...user,
             },
@@ -23,15 +26,9 @@ async function handler(req:NextApiRequest, res:NextApiResponse) { // handler 주
         },
       },
     });
-    console.log(token);
-    return res.status(200).end();
+    return res.json({
+      ok: true,
+    });
 }
-// http://localhost:3000/api/client-test에서 확인 가능
-// api 라우트를 만드는 방식 : api 폴더 생성 후 파일 생성
 
-// nextJS에서 api route를 만들때는 해당 function을 export default 해야 한다.
-export default withHandler("POST", handler) // withHandler를 호출하면, async function(req:NextApiRequest, res:NextApiResponse) {...} 가 리턴된다.
-// http://localhost:3000/api/users/enter에 들어가면, get 요청이기 때문에 위 문장의 POST 요청과 맞지 않게 되어 withHandler.ts 의 res.status(405).end();에 걸린다.
-
-
-
+export default withHandler("POST", handler);

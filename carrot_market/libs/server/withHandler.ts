@@ -1,5 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+export interface ResponseType {
+    ok: boolean;
+    [key: string]: any;
+  }
 
 // enter.tsx에서 사용하는 방식에 따라 첫번째 인자는 http 메소드
 // 두번째 인자는 실행해야 할 function. 인자로 enter.tsx의 handler함수의 인자들을 받고, void를 리턴하는 함수를 받는다.
