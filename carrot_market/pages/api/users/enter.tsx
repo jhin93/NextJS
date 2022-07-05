@@ -20,8 +20,15 @@ async function handler(req:NextApiRequest, res:NextApiResponse) { // handler 주
         update: {} // 이 경우엔 찾아도 update 안할 것이기에 비워둠.
     })
     const token = await client.token.create({
-        data: { // 왜 data는 payload, user를 필요로 하는가?
-            
+        data: { // index.d.ts의 type TokenCreateInput 에 나와있음. 
+            //data -cmd 클릭- TokenCreateInput - UserCreateNestedOneWithoutTokensInput cmd 클릭 - type UserCreateNestedOneWithoutTokensInput
+            // UserCreateNestedOneWithoutTokensInput 가 PrismaClient로 모델 연결 가능 - 유저를 생성해 연결하고 싶은 토큰을 명시해야 함. 아니면 그냥 create 하고 존재하는 토큰에 연결
+            payload: "1234",
+            user: {
+                connect: { // 이 토큰을 connect 한다. 12번 줄의 user와
+                    id: user.id 
+                }
+            }
         }
     })
     // if(email){ // 만약 입력된 이메일의 유저를 찾는다면
