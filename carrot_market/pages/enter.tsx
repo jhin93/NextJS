@@ -12,6 +12,7 @@ interface EnterForm {
 }
 
 const Enter: NextPage = () => {
+  // enter mutation.
   // enter를 호출하면 fetch로 POST 한다. 또한 mutation에서 무슨 일(ex 로딩, 에러, POST의 결과)이 일어나는지 알기 위해 {}를 사용.
   const [enter, {loading, data, error}] = useMutation("/api/users/enter"); // useMutation은 어떤 url을 mutate할지 알아야 한다.
   const [submitting, setSubmitting] = useState(false);
