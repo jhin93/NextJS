@@ -25,7 +25,7 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())// User의 model id. 기본설정으로 자동증가.
-  phone BigInt? @unique // phone은 필수는 아니지만(required가 아닌 ?이다), 있다면 하나만 존재.
+  phone String? @unique // phone은 필수는 아니지만(required가 아닌 ?이다), 있다면 하나만 존재.
   email String? @unique // 이메일. 필수 X, 하나만 존재
   name String // 이름
   avatar String? // 아바타는 필수는 아님. 이미지 url이기에 string
