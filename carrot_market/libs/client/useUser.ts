@@ -1,15 +1,14 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useSWR from "swr";
 
-const fetcher = (url: string) => fetch(url).then((response) => response.json());
-
 export default function useUser() {
-  const { data, error } = useSWR("/api/users/me", fetcher); // swr은 2개의 인자를 받는다. 요청을 받는 인자, fetcher 함수.
+  const { data, error } = useSWR("/api/users/me");
   const router = useRouter();
-
-  //         return router.replace("/enter");
-
-  return data;
-
+  useEffect(() => {
+    if (data && !data.ok) { // 만약 로그인 상태가 아니면, 로그인 창으로 이동.
+      router.replace("/enter");
+    }
+  }, [data, router]);
+  return { user: data?.profile, isLoading: !data && !error };
 }
