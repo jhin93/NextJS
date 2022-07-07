@@ -32,15 +32,6 @@ const Upload: NextPage = () => {
         <Button text="Upload item" />
       </form>
 
-    
-          
-            
-    
-
-          
-    
-    
-  
     </Layout>
   );
 };
