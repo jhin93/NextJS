@@ -1,8 +1,11 @@
 import type { NextPage } from "next";
 import Button from "@components/button";
 import Layout from "@components/layout";
+import { useRouter } from 'next/router';
 
 const ItemDetail: NextPage = () => {
+    const router = useRouter();
+    console.log("router : ", router.query)
     return (
       <Layout canGoBack>
         <div className="px-4  py-4">
@@ -35,16 +38,6 @@ const ItemDetail: NextPage = () => {
                 <button className="p-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500">
                   <svg
                     className="h-6 w-6 "
-  
-      
-            
-              
-      
-  
-            
-      
-      
-    
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
