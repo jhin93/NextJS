@@ -32,6 +32,7 @@ model User {
   createdAt DateTime @default(now()) // 유저가 언제 생성됐는지, 언제 수정됐는지. 날짜타입(DateTime). 기본적으로 now() 함수 사용. 새유저가 만들어질 때, 날짜를 가져옴
   updatedAt DateTime @updatedAt // 유저가 업데이트 될때마다 이 필드가 변한다고 Prisma에게 알려줌(updatedAt)
   tokens Token[]
+  products Product[]
 }
 
 model Token {
@@ -43,5 +44,15 @@ model Token {
   updatedAt DateTime @updatedAt
 }
 
-// 작업 루틴
-// 1. model 2. database 3. mutation 4. useSWR로 데이터 가져오기
+model Product {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int
+  image       String
+  name        String
+  price       Int
+  description String   @db.MediumText
+}
+
