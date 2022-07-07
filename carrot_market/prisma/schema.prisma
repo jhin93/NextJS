@@ -42,3 +42,6 @@ model Token {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+// 작업 루틴
+// 1. model 2. database 3. mutation 4. useSWR로 데이터 가져오기
