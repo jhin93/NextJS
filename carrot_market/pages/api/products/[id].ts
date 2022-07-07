@@ -1,0 +1,1 @@
+//  프론트엔드에는 router.query, 백엔드에는 req.query
