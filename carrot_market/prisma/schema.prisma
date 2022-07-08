@@ -1,49 +1,35 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Prisma는 이 파일을 읽고 데이터베이스에 변경점을 deploy한다.
-// 또 자바스크립트 혹은 타입스크립트 client를 만들어준다. 프리즈마가 만들어준 client는 타입스크립트로 데이터베이스에 말하는 것을 도와준다. prisma는 번역기.
-
-// foreign key.
-// 사용자 id만 저장하면, 그 id에 딸린 다른 정보들까지 사용자 db에서 알아낼 수 있다.
-// 프리즈마가 댓글을 작성한 아이디가 실제로 존재하는 유저인지 vitess 대신 확인해준다.
-
-//Vitess는 PlanetScale이 데이터베이스로 사용한다.
-// Scability 특화됐다. 디비를 잘게 쪼개서 여러 서버에 분산시키는 것에 특화.
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
 }
-
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
   referentialIntegrity = "prisma"
 }
-
-
 model User {
-  id Int @id @default(autoincrement())// User의 model id. 기본설정으로 자동증가.
-  phone String? @unique // phone은 필수는 아니지만(required가 아닌 ?이다), 있다면 하나만 존재.
-  email String? @unique // 이메일. 필수 X, 하나만 존재
-  name String // 이름
-  avatar String? // 아바타는 필수는 아님. 이미지 url이기에 string
-  createdAt DateTime @default(now()) // 유저가 언제 생성됐는지, 언제 수정됐는지. 날짜타입(DateTime). 기본적으로 now() 함수 사용. 새유저가 만들어질 때, 날짜를 가져옴
-  updatedAt DateTime @updatedAt // 유저가 업데이트 될때마다 이 필드가 변한다고 Prisma에게 알려줌(updatedAt)
-  tokens Token[]
-  products Product[]
+  id        Int       @id @default(autoincrement())
+  phone     String?   @unique
+  email     String?   @unique
+  name      String
+  avatar    String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  tokens    Token[]
+  products  Product[]
+  fav       Fav[]
 }
 
 model Token {
   id        Int      @id @default(autoincrement())
   payload   String   @unique
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) // 이 문장은 바로 아래의 userId 필드가 모델 User의 id필드를 가리킨다는 말이다.
-  userId    Int // 이 userId가 User의 id를 가리킨다. 즉 토큰(userId)이 유저 정보(모델 User의 id)를 가리키는 것 
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
 model Product {
   id          Int      @id @default(autoincrement())
   createdAt   DateTime @default(now())
@@ -54,5 +40,15 @@ model Product {
   name        String
   price       Int
   description String   @db.MediumText
+  favs        Fav[]
 }
 
+model Fav {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

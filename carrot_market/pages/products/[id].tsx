@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import Link from "next/link";
 import { Product, User } from "@prisma/client";
-
 interface ProductWithUser extends Product {
   user: User;
 }
@@ -14,7 +13,6 @@ interface ItemDetailResponse {
   product: ProductWithUser;
   relatedProducts: Product[];
 }
-
 const ItemDetail: NextPage = () => {
   const router = useRouter();
   const { data } = useSWR<ItemDetailResponse>(
@@ -71,7 +69,7 @@ const ItemDetail: NextPage = () => {
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Similar items</h2>
           <div className=" mt-6 grid grid-cols-2 gap-4">
-            {data?.relatedProducts.map((product) => (
+            {data?.relatedProducts?.map((product) => (
               <div key={product.id}>
                 <div className="h-56 w-full mb-4 bg-slate-300" />
                 <h3 className="text-gray-700 -mb-1">{product.name}</h3>
