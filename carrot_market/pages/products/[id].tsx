@@ -4,16 +4,20 @@ import Layout from "@components/layout";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import Link from "next/link";
-import { Product } from "@prisma/client";
+import { Product, User } from "@prisma/client";
 
+interface ProductWithUser extends Product {
+  user: User;
+}
 interface ItemDetailResponse {
   ok: boolean;
-  product: Product
+  product: ProductWithUser;
+  relatedProducts: Product[];
 }
 
 const ItemDetail: NextPage = () => {
   const router = useRouter();
-  const { data, error } = useSWR<ItemDetailResponse>(
+  const { data } = useSWR<ItemDetailResponse>(
     router.query.id ? `/api/products/${router.query.id}` : null
   );
   return (
@@ -45,16 +49,6 @@ const ItemDetail: NextPage = () => {
             <div className="flex items-center justify-between space-x-2">
               <Button large text="Talk to seller" />
               <button className="p-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500">
-
-    
-          
-            
-    
-
-          
-    
-    
-  
                 <svg
                   className="h-6 w-6 "
                   xmlns="http://www.w3.org/2000/svg"
@@ -77,11 +71,13 @@ const ItemDetail: NextPage = () => {
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Similar items</h2>
           <div className=" mt-6 grid grid-cols-2 gap-4">
-            {[1, 2, 3, 4, 5, 6].map((_, i) => (
-              <div key={i}>
+            {data?.relatedProducts.map((product) => (
+              <div key={product.id}>
                 <div className="h-56 w-full mb-4 bg-slate-300" />
-                <h3 className="text-gray-700 -mb-1">Galaxy S60</h3>
-                <span className="text-sm font-medium text-gray-900">$6</span>
+                <h3 className="text-gray-700 -mb-1">{product.name}</h3>
+                <span className="text-sm font-medium text-gray-900">
+                  ${product.price}
+                </span>
               </div>
             ))}
           </div>
