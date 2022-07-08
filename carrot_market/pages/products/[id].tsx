@@ -4,10 +4,16 @@ import Layout from "@components/layout";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import Link from "next/link";
+import { Product } from "@prisma/client";
+
+interface ItemDetailResponse {
+  ok: boolean;
+  product: Product
+}
 
 const ItemDetail: NextPage = () => {
   const router = useRouter();
-  const { data, error } = useSWR(
+  const { data, error } = useSWR<ItemDetailResponse>(
     router.query.id ? `/api/products/${router.query.id}` : null
   );
   return (
