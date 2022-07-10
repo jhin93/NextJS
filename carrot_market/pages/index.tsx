@@ -7,12 +7,18 @@ import Head from "next/head";
 import useSWR from "swr";
 import { Product } from "@prisma/client";
 
-interface ProductsResponse {
-  ok: boolean;
-  products: Product[];
+interface ProductWithCount extends Product {
+  _count: {
+    favs: number;
+  };
 }
 
-const Home: NextPage = () => {
+interface ProductsResponse {
+  ok: boolean;
+  products: ProductWithCount[];
+}
+
+const Home: NextPage = () => {  
   const { user, isLoading } = useUser();
   const { data } = useSWR<ProductsResponse>("/api/products");
   return (
@@ -27,8 +33,7 @@ const Home: NextPage = () => {
             key={product.id}
             title={product.name}
             price={product.price}
-            comments={1}
-            hearts={1}
+            hearts={product._count.favs}
           />
         ))}
         <FloatingButton href="/products/upload">
